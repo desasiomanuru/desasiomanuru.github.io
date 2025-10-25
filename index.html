@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Desa Siomanuru</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+            color: white;
+            padding: 1rem;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .logo-text {
+            text-align: center;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* Menu untuk desktop */
+        .desktop-menu {
+            display: none;
+        }
+
+        .desktop-menu ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .desktop-menu ul li {
+            margin-left: 15px;
+        }
+
+        .desktop-menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .desktop-menu ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Menu untuk mobile */
+        .mobile-menu-btn {
+            display: block;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 70%;
+            height: 100%;
+            background: #2e7d32;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 2rem;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .mobile-menu ul li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('fotodesa1.jpeg') no-repeat center center/cover;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+        }
+
+        .hero-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .facilities {
+            background-color: white;
+        }
+
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(46, 139, 87, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .facility-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .facility-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .facility-img {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .facility-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .facility-card:hover .facility-img img {
+            transform: scale(1.1);
+        }
+
+        .facility-info {
+            padding: 20px;
+        }
+
+        .facility-info h3 {
+            margin-bottom: 10px;
+            color: #2e8b57;
+        }
+
+
+        .btn {
+            display: inline-block;
+            background: #2e7d32;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: #1b5e20;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2e7d32;
+            position: relative;
+            font-size: 1.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #2e7d32;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-content h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* News Section */
+        .news {
+            background-color: #f9f9f9;
+        }
+
+        .news-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .profile {
+            background-color: #f0f7f4;
+        }
+
+        .profile-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .profile-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .profile-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-details {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+
+        .news-content {
+            padding: 15px;
+        }
+
+        .news-date {
+            color: #777;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .news-content h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .news-content p {
+            font-size: 0.9rem;
+        }
+
+        /* Potensi Section */
+        .potensi {
+            background-color: white;
+        }
+
+        .potensi-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .potensi-card {
+            text-align: center;
+            padding: 20px 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .potensi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .potensi-icon {
+            font-size: 2.5rem;
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        .potensi-card h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .potensi-card p {
+            font-size: 0.9rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background-color: #f9f9f9;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .gallery-item {
+            height: 150px;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: white;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .contact-info {
+            padding-right: 0;
+        }
+
+        .contact-info h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #2e7d32;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .map {
+            height: 250px;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .contact-info, .contact-map {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .map-container {
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background: #2e7d32;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: white;
+        }
+
+        .footer-section p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #2e8b57;
+            transform: translateY(-3px);
+        }
+
+
+        .social-icons a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .copyright {
+            margin-top: -10px;
+            padding-top: -5px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design untuk Tablet */
+        @media (min-width: 600px) {
+            .gallery-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .news-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .potensi-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Responsive Design untuk Desktop */
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            .desktop-menu {
+                display: block;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .footer-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .news-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .potensi-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo profil.png" alt="Logo Desa Siomonuru">
+                <div class="logo-text">
+                    <h1>Desa Siomanuru</h1>
+                    <p>Kec. Lasalimu Selatan, Kab. Buton</p>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="desktop-menu">
+                <ul>
+                    <li><a href="#hero">Beranda</a></li>
+                    <li><a href="#about">Tentang Desa</a></li>
+                    <li><a href="#profile">Profil</a></li>
+                    <li><a href="#facilities">Fasilitas</a></li>
+                    <li><a href="#gallery">Galeri</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Menu Mobile -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#hero">Beranda</a></li>
+            <li><a href="#about">Tentang Desa</a></li>
+            <li><a href="#profile">Profil</a></li>
+            <li><a href="#facilities">Fasilitas</a></li>
+            <li><a href="#gallery">Galeri</a></li>
+            <li><a href="contact">Kontak</a></li>
+        </ul>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h2>Selamat Datang di Website Desa Siomanuru</h2>
+            <p>Desa yang damai dan asri di Kecamatan Lasalimu Selatan, tempat harmoni Islam dan Hindu berpadu dalam kerukunan dan budaya yang kaya.</p>
+            <a href="#gallery" class="btn">Jelajahi Desa Kami</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">Tentang Desa Siomanuru</h2>
+        <div class="about-container">
+            <div class="about-image">
+                <img src="fotodesa.jpeg" alt="Pemandangan Desa Siomanuru">
+            </div>
+            <div class="about-content">
+                <p>Desa Siomanuru terletak di Kecamatan Lasalimu Selatan, Kabupaten Buton, Provinsi Sulawesi Tenggara. Desa ini dikenal dengan pemandangan alam yang indah, hamparan sawah hijau, dan udara yang sejuk. Masyarakatnya ramah serta menjunjung tinggi semangat gotong royong, dengan mayoritas penduduk bermata pencaharian sebagai petani yang memanfaatkan potensi alam sekitar. Kampung KB Siomanuru juga dihuni oleh warga dari berbagai daerah seperti Bali, Jawa Timur, Jawa Tengah, dan Jawa Barat melalui program transmigrasi tahun 1990, di mana kehidupan antar suku berjalan harmonis dan saling bekerja sama. Secara geografis, Desa Siomanuru berbatasan dengan Desa Wajah Jaya di utara, Desa Labuhan Diri di selatan, Desa Kinapani Makmur di timur, dan Desa Siontapina di barat.</p>      
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+   <section class="profile" id="profile">
+        <div class="container">
+            <div class="section-title">
+                <h4>Profil Desa</h4>
+            </div>
+            <div class="profile-content">
+                <div class="profile-image">
+                    <!-- Ganti dengan foto profil desa yang asli -->
+                    <img src="fotopemandangan.jpeg" alt="Profil Desa Siomanuru">
+                </div>
+                <div class="profile-details">
+                    <h3>Informasi Umum Desa Siomanuru</h3>
+                    <p>Desa Siomanuru merupakan salah satu desa di Kecamatan Lasalimu Selatan yang memiliki luas wilayah sekitar 3 Km2. Desa ini terdiri dari 4 dusun dengan jumlah penduduk sekitar 1.036 jiwa.</p>
+                    
+                    <div class="profile-info">
+                        <div class="info-item">
+                            <h3>Sejarah Desa</h3>
+                            <p>Desa Siomanuru berdiri sejak tahun 1990 dengan nama awal "Sio Manuru" yang berarti tempat yang tenang dan damai.</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Visi & Misi</h3>
+                            <p>Visi: "Terwujudnya Desa Siomanuru yang Mandiri, Sejahtera dan Berbudaya". Misi: Meningkatkan kesejahteraan masyarakat melalui pemberdayaan ekonomi.</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Struktur Pemerintahan</h3>
+                            <p>Kepala Desa: Muhammad Darwis</p>
+                            <p>Sekretaris Desa: La Ode Zafrin</p> 
+                            <p>Bendahara: I Made Hendriawan, Sp</p>
+                        </div>
+                        <div class="info-item">
+                            <h3>Potensi Unggulan</h3>
+                            <p>Pertanian padi, perkebunan kelapa, perkebunan nilam dan industri rumah tangga kerajinan anyaman.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fasilitas Section -->
+    <section class="facilities" id="facilities">
+        <div class="container">
+            <div class="section-title">
+                <h4>Fasilitas Desa</h4>
+            </div>
+            <div class="facility-grid">
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="15.jpg" alt="Sekolah">
+                    </div>
+                    <div class="facility-info">
+                        <h3>Pendidikan</h3>
+                        <p>Desa Siomanuru memiliki beberapa sekolah mulai dari TK, SMP dan SMA yang mendukung pendidikan anak-anak desa.
+                        </p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80" alt="Kesehatan">
+                    </div>
+                    <div class="facility-info">
+                        <h3>Kesehatan</h3>
+                        <p>Tersedia puskesmas pembantu dan posyandu yang melayani kesehatan masyarakat desa.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80" alt="Tempat Ibadah">
+                    </div>
+                    <div class="facility-info">
+                        <h3>Tempat Ibadah</h3>
+                        <p>Berbagai tempat ibadah seperti masjid dan pura tersebar di seluruh wilayah desa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Fasalitas Section -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Galeri Desa</h2>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="tk.jpeg" alt="Kegiatan Warga">
+                <div class="gallery-overlay">
+                 <i>TK Abdi Pertiwi</i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="sdnegeri73buton.jpeg" alt="Kegiatan Desa">
+                  <div class="gallery-overlay">
+                 <i>SD Negeri 73 Buton</i>
+                 </div>
+            </div>
+            <div class="gallery-item">
+                <img src="fotosmp24buton.jpeg" alt="Pemandangan Desa">
+                  <div class="gallery-overlay">
+                 <i>SMP Negeri 24 Buton</i>
+                 </div>
+            </div>
+            <div class="gallery-item">
+                <img src="sman2lasalimuselatan.jpeg" alt="Pertanian">
+                  <div class="gallery-overlay">
+                 <i>SMA Negeri 2 Lasalimu Selatan</i>
+                 </div>
+            </div>
+            <div class="gallery-item">
+                <img src="perkebunannilam.jpeg" alt="Wisata">
+                  <div class="gallery-overlay">
+                 <i>Perkebunan Nilam</i>
+                 </div>
+            </div>
+            <div class="gallery-item">
+                <img src="pembuatanminyaknilam.jpeg" alt="Kesenian">
+                 <div class="gallery-overlay">
+                 <i>Pembuatan Minyak Nilam</i>
+                 </div>
+            </div>
+               <div class="gallery-item">
+                <img src="fotobalaidesa.png" alt="Kegiatan Desa">
+                  <div class="gallery-overlay">
+                 <i>Balai Desa Siomanuru</i>
+                 </div>
+            </div>
+             <div class="gallery-item">
+                <img src="masjid.jpeg" alt="Kegiatan Warga">
+                <div class="gallery-overlay">
+                 <i>Masjid Jami Baitul Muhajirin</i>
+                </div>
+            </div>
+             <div class="gallery-item">
+                <img src="foto pura.jpeg" alt="Kegiatan Warga">
+                <div class="gallery-overlay">
+                 <i>Pura Candra himawan</i>
+                </div>
+            </div>
+             <div class="gallery-item">
+                <img src="foto posyandu.jpeg" alt="Kegiatan Warga">
+                <div class="gallery-overlay">
+                 <i>Posyandu</i>
+                </div>
+            </div>
+              <div class="gallery-item">
+                <img src="fotopuskemas.png" alt="Kegiatan Warga">
+                <div class="gallery-overlay">
+                 <i>puskesmas</i>
+                </div>
+            </div>
+              <div class="gallery-item">
+                <img src="fotolapangandesa.png" alt="Kegiatan Warga">
+                <div class="gallery-overlay">
+                 <i>Lapangan Desa Siomanuru</i>
+                </div>
+            </div>
+               <div class="gallery-item">
+                <img src="foto pembakaran kopra.jpeg" alt="Kegiatan Warga">
+                <div class="gallery-overlay">
+                 <i>Pembuatan Kopra</i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Kontak Kami</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Informasi Kontak</h3>
+                <div class="contact-detail">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <p>Jl. Poros Siomanuru - Siotapina Kode Pos 93576, Kec. Lasalimu Selatan, Kab. Buton</p>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <p>0822-5290-2195</p>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <p>Senin - Jumat: 08:00 - 16:00</p>
+                </div>
+                <br><br>
+            </div>
+             <div class="contact-map">
+                    <h3>Lokasi Desa</h3>
+                    <div class="map-container">
+                        <!-- Ganti dengan embed map lokasi desa yang sebenarnya -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1014076.6803913522!2d122.08301034999999!3d-5.469961799999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2da15579c81ad4f5%3A0xb0e79498cde1fd04!2sKantor%20Desa%20Siomanuru!5e0!3m2!1sid!2sid!4v1728391200000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>     
+        <div class="copyright">
+            <p>&copy; 2025 Desa Siomonuru. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script untuk menu mobile
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const overlay = document.getElementById('overlay');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenuBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+        
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Menutup menu saat mengklik link
+        const menuLinks = document.querySelectorAll('.mobile-menu a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
+</body>
+</html>
